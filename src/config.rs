@@ -605,17 +605,15 @@ impl AppConfig {
     }
 
     pub fn config_dir() -> PathBuf {
-        dirs::config_dir()
-            .or_else(|| dirs::home_dir().map(|h| h.join(".config")))
+        dirs::home_dir()
             .unwrap_or_else(Self::private_fallback_base)
-            .join("speech-to-text")
+            .join(".local/share/daggas/speech-to-text")
     }
 
     pub fn data_dir() -> PathBuf {
-        dirs::data_dir()
-            .or_else(|| dirs::home_dir().map(|h| h.join(".local/share")))
+        dirs::home_dir()
             .unwrap_or_else(Self::private_fallback_base)
-            .join("speech-to-text")
+            .join(".local/share/daggas/speech-to-text")
     }
 
     /// Last-resort base directory when no XDG/HOME directory can be determined.
